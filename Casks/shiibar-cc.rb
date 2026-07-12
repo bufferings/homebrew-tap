@@ -1,6 +1,6 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar CC.
 #
-# This file is a template, not a valid cask: 0.3.0 and 70847630f27e0d8d230fe0eadfcd32a12169496cbc0b23fd58c2288607656b60 are
+# This file is a template, not a valid cask: 0.3.1 and 525f0c6d6da875ea7be7617ab316c44ba0195c76945a79e1f6bf5edff5abac93 are
 # placeholders substituted by .github/workflows/bump-cask.yml when it renders
 # this file into Casks/shiibar-cc.rb in the bufferings/homebrew-tap repository
 # on every published (non-prerelease) GitHub Release. ci.yml renders it with
@@ -12,8 +12,8 @@
 # promising support that has never been tested. A source build from the
 # repository is the alternative for Intel Macs.
 cask "shiibar-cc" do
-  version "0.3.0"
-  sha256 "70847630f27e0d8d230fe0eadfcd32a12169496cbc0b23fd58c2288607656b60"
+  version "0.3.1"
+  sha256 "525f0c6d6da875ea7be7617ab316c44ba0195c76945a79e1f6bf5edff5abac93"
 
   url "https://github.com/bufferings/shiibar-cc/releases/download/v#{version}/shiibar-cc-#{version}-arm64.zip"
   name "Shiibar CC"
@@ -86,6 +86,39 @@ cask "shiibar-cc" do
 
       "$claude_bin" plugin marketplace add bufferings/shiibar-cc || true
       "$claude_bin" plugin install shiibar-cc@shiibar-cc || true
+    SH
+
+    system_command "/bin/bash", args: ["-c", script]
+  end
+
+  # Insurance for `uninstall quit:` below: that Apple Event only reaches the
+  # daemon while the app is running and still holds its socket. A daemon
+  # whose socket file was already gone (app crash, a dropped handoff during
+  # an install switch) is unreachable that way and would otherwise survive
+  # `brew uninstall` as an orphan (DESIGN.md §8.8 / §4.2).
+  #
+  # `signal:` cannot do this instead: per the Homebrew Cask Cookbook
+  # (https://docs.brew.sh/Cask-Cookbook#uninstall-signal), its targets are
+  # bundle IDs, and shiibar-ccd is a bare helper binary with no bundle ID of
+  # its own. `uninstall script:` (same page,
+  # https://docs.brew.sh/Cask-Cookbook#uninstall-script) needs an existing
+  # script file (`executable:`) rather than an inline command, so this uses
+  # `uninstall_postflight`, a plain Ruby block that runs after the uninstall
+  # artifacts are processed (same page, "Stanza: *flight") — the same
+  # `system_command "/bin/bash", args: [...]` shape already used in
+  # `postflight` above. (`Cask/StanzaOrder` in `brew style --cask` requires
+  # this block to appear before `uninstall` in the file.)
+  #
+  # Same pattern and `-xf` reasoning as scripts/dev-uninstall.sh: verified
+  # on-device that `-xf` requires an exact match of the full argument list,
+  # so a bare full-path invocation with no arguments matches while a
+  # process that merely takes this path as an argument (e.g. `tail -f` on
+  # it) does not. The daemon is always launched with the bundled absolute
+  # path and no arguments (DaemonLifecycleManager.swift: `process.arguments
+  # = []`).
+  uninstall_postflight do
+    script = <<~'SH'
+      pkill -xf '/.*/Shiibar CC\.app/Contents/Helpers/shiibar-ccd' || true
     SH
 
     system_command "/bin/bash", args: ["-c", script]
