@@ -1,6 +1,6 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar CC.
 #
-# This file is a template, not a valid cask: 0.3.1 and 525f0c6d6da875ea7be7617ab316c44ba0195c76945a79e1f6bf5edff5abac93 are
+# This file is a template, not a valid cask: 0.4.0 and 333ed42feaed812d793843a2ae2de49dd55736f4fd96af7d50746b9ce2922d76 are
 # placeholders substituted by .github/workflows/bump-cask.yml when it renders
 # this file into Casks/shiibar-cc.rb in the bufferings/homebrew-tap repository
 # on every published (non-prerelease) GitHub Release. ci.yml renders it with
@@ -12,15 +12,15 @@
 # promising support that has never been tested. A source build from the
 # repository is the alternative for Intel Macs.
 cask "shiibar-cc" do
-  version "0.3.1"
-  sha256 "525f0c6d6da875ea7be7617ab316c44ba0195c76945a79e1f6bf5edff5abac93"
+  version "0.4.0"
+  sha256 "333ed42feaed812d793843a2ae2de49dd55736f4fd96af7d50746b9ce2922d76"
 
   url "https://github.com/bufferings/shiibar-cc/releases/download/v#{version}/shiibar-cc-#{version}-arm64.zip"
   name "Shiibar CC"
   desc "Menu bar app that tracks Claude Code status and jumps to its iTerm2 tab"
   homepage "https://github.com/bufferings/shiibar-cc"
 
-  depends_on macos: :ventura
+  depends_on macos: :sonoma
   depends_on arch:  :arm64
 
   app "Shiibar CC.app"
