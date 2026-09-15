@@ -1,6 +1,6 @@
 # bufferings/homebrew-tap の Formula/jai-smell.rb のテンプレート。
 #
-# 0.1.0 と 7f3b861c84ebc6680418cd59da4d87d4e1a6255731d2252a5f5acaa732e87ed9 は、GitHub のリリースを公開した際に
+# 0.2.0 と ab7448b3d58fd660d0ecf1ee471e570e57e4c1bc852063514967d249c39b715b は、GitHub のリリースを公開した際に
 # .github/workflows/bump-formula.yml が置換し、tap にプッシュする。
 # ci.yml ではダミーの値に置換して brew style を実行する。
 #
@@ -10,10 +10,10 @@
 class JaiSmell < Formula
   desc "Flags unnatural Japanese expressions in text written by Claude Code"
   homepage "https://github.com/bufferings/jai-smell"
-  url "https://github.com/bufferings/jai-smell/releases/download/v0.1.0/jai-smell-0.1.0-arm64.tar.gz"
+  url "https://github.com/bufferings/jai-smell/releases/download/v0.2.0/jai-smell-0.2.0-arm64.tar.gz"
   # URL の「arm64」から「64」をバージョンとして解析するため、明記する
-  version "0.1.0"
-  sha256 "7f3b861c84ebc6680418cd59da4d87d4e1a6255731d2252a5f5acaa732e87ed9"
+  version "0.2.0"
+  sha256 "ab7448b3d58fd660d0ecf1ee471e570e57e4c1bc852063514967d249c39b715b"
   license "MIT"
 
   depends_on arch: :arm64
@@ -21,15 +21,16 @@ class JaiSmell < Formula
 
   def install
     bin.install "jai-smell"
-    pkgshare.install "jai-smell.toml"
+    pkgshare.install "jai-smell.toml", "preset-rules.toml", "custom-rules.toml"
     prefix.install "THIRD-PARTY-NOTICES.txt"
   end
 
   def caveats
     <<~EOS
-      Run the following to create ~/.config/jai-smell/jai-smell.toml
+      Run the following to create the config files in ~/.config/jai-smell
       and install the Claude Code plugin:
         jai-smell init
+      After upgrading, run jai-smell init again to update preset-rules.toml.
     EOS
   end
 
