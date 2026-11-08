@@ -1,15 +1,15 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar GH.
 #
 # A template, not a valid cask: .github/workflows/bump-cask.yml replaces
-# 0.1.0 and 301b7c923a34c4b8ede4e0783acf6df4dd6f58a21b5b5d67e1fb19234e0988de when it renders this file into
+# 0.2.0 and f83ec97110d3a84c1fdf26f97dd92634f01bb5a8ba38d5cf8ff8440b62d11cc2 when it renders this file into
 # Casks/shiibar-gh.rb of bufferings/homebrew-tap for a published release.
 # CI renders it with dummy values and runs `brew style --cask` on it.
 #
 # Apple Silicon only, macOS 14 or later (docs/DESIGN.md, "Distribution and
 # signing").
 cask "shiibar-gh" do
-  version "0.1.0"
-  sha256 "301b7c923a34c4b8ede4e0783acf6df4dd6f58a21b5b5d67e1fb19234e0988de"
+  version "0.2.0"
+  sha256 "f83ec97110d3a84c1fdf26f97dd92634f01bb5a8ba38d5cf8ff8440b62d11cc2"
 
   url "https://github.com/bufferings/shiibar-gh/releases/download/v#{version}/shiibar-gh-#{version}-arm64.zip"
   name "Shiibar GH"
@@ -42,9 +42,11 @@ cask "shiibar-gh" do
 
   caveats <<~EOS
     Open Shiibar GH once: it asks for the notification permission and
-    registers itself to launch at login. Add your tokens in Settings ›
-    Scopes. The tokens stay in the Keychain (service shiibar-gh) after an
-    uninstall; remove them with `shiibar-gh scope remove` before
-    uninstalling, or in Keychain Access.
+    registers itself to launch at login. Add an account in Settings ›
+    Accounts with a classic personal access token (scopes repo,
+    notifications, read:org). Version 0.2 does not read the tokens of 0.1:
+    add your accounts again. The tokens stay in the Keychain (service
+    shiibar-gh, account accounts) after an uninstall; remove them with
+    `shiibar-gh token reset` before uninstalling, or in Keychain Access.
   EOS
 end
