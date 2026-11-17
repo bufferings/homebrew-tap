@@ -1,6 +1,6 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar CC.
 #
-# This file is a template, not a valid cask: 0.7.0 and ac24ee070bd4f793dea67fac07e92029653f6007cdb8ba59ef0a168ef0a2b997 are
+# This file is a template, not a valid cask: 0.8.0 and fb5c3e75995b8a2ede89f182a1437c4bab14a8fbf801a624331ef4f07f3b25e7 are
 # placeholders substituted by .github/workflows/bump-cask.yml when it renders
 # this file into Casks/shiibar-cc.rb in the bufferings/homebrew-tap repository
 # on every published (non-prerelease) GitHub Release. ci.yml renders it with
@@ -12,8 +12,8 @@
 # promising support that has never been tested. A source build from the
 # repository is the alternative for Intel Macs.
 cask "shiibar-cc" do
-  version "0.7.0"
-  sha256 "ac24ee070bd4f793dea67fac07e92029653f6007cdb8ba59ef0a168ef0a2b997"
+  version "0.8.0"
+  sha256 "fb5c3e75995b8a2ede89f182a1437c4bab14a8fbf801a624331ef4f07f3b25e7"
 
   url "https://github.com/bufferings/shiibar-cc/releases/download/v#{version}/shiibar-cc-#{version}-arm64.zip"
   name "Shiibar CC"
