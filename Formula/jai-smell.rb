@@ -1,6 +1,6 @@
 # bufferings/homebrew-tap の Formula/jai-smell.rb のテンプレート。
 #
-# 0.5.0 と da95a4da9c25d315c82d7b48d7dcfc535957cd9bb204b618dc7e924d8210f9da は、GitHub のリリースを公開した際に
+# 0.5.1 と ef426034caa8fe6d388ff58941ec7e4691f8b01b2db1e4d83ad85e441fe1d3ce は、GitHub のリリースを公開した際に
 # .github/workflows/bump-formula.yml が置換し、tap にプッシュする。
 # ci.yml ではダミーの値に置換して brew style を実行する。
 #
@@ -10,10 +10,10 @@
 class JaiSmell < Formula
   desc "Flags unnatural Japanese expressions in text written by Claude Code"
   homepage "https://github.com/bufferings/jai-smell"
-  url "https://github.com/bufferings/jai-smell/releases/download/v0.5.0/jai-smell-0.5.0-arm64.tar.gz"
+  url "https://github.com/bufferings/jai-smell/releases/download/v0.5.1/jai-smell-0.5.1-arm64.tar.gz"
   # URL の「arm64」から「64」をバージョンとして解析するため、明記する
-  version "0.5.0"
-  sha256 "da95a4da9c25d315c82d7b48d7dcfc535957cd9bb204b618dc7e924d8210f9da"
+  version "0.5.1"
+  sha256 "ef426034caa8fe6d388ff58941ec7e4691f8b01b2db1e4d83ad85e441fe1d3ce"
   license "MIT"
 
   depends_on arch: :arm64
