@@ -1,10 +1,11 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar CC.
 #
-# This file is a template, not a valid cask: 0.9.0 and f59ad1734c8cca192c5a2afa63d1143f3869200a49132bc353c84f023cdc1d00 are
-# placeholders substituted by .github/workflows/bump-cask.yml when it renders
+# This file is a template, not a valid cask: the version and sha256 values
+# below are double-braced placeholders (VERSION and SHA256) that
+# .github/workflows/bump-cask.yml substitutes when it renders
 # this file into Casks/shiibar-cc.rb in the bufferings/homebrew-tap repository
 # on every published (non-prerelease) GitHub Release. ci.yml renders it with
-# dummy values and runs `brew style --cask` on the result so a syntax error
+# dummy values and runs `brew style` on the result so a syntax error
 # here fails CI instead of surfacing only at bump time.
 #
 # arm64-only: there is no Intel build (no Intel Mac or CI runner to verify one
@@ -12,12 +13,12 @@
 # promising support that has never been tested. A source build from the
 # repository is the alternative for Intel Macs.
 cask "shiibar-cc" do
-  version "0.9.0"
-  sha256 "f59ad1734c8cca192c5a2afa63d1143f3869200a49132bc353c84f023cdc1d00"
+  version "0.10.0"
+  sha256 "ab58da71fc6fa4ccaf268f34c3e3e7b42b3f18d576a6d658e1708c644645482d"
 
   url "https://github.com/bufferings/shiibar-cc/releases/download/v#{version}/shiibar-cc-#{version}-arm64.zip"
   name "Shiibar CC"
-  desc "Menu bar app that tracks Claude Code status and jumps to its iTerm2 tab"
+  desc "Menu bar Claude Code tracker that jumps to its iTerm2, Terminal or Ghostty tab"
   homepage "https://github.com/bufferings/shiibar-cc"
 
   depends_on arch:  :arm64
@@ -136,7 +137,7 @@ cask "shiibar-cc" do
   # `uninstall_postflight_steps`, which runs after the uninstall artifacts
   # are processed (the steps form of "Stanza: *flight" on the same page; see
   # `postflight_steps` above for why steps). (`Cask/StanzaOrder` in
-  # `brew style --cask` requires this block to appear before `uninstall` in
+  # `brew style` requires this block to appear before `uninstall` in
   # the file.)
   #
   # Same pattern and `-xf` reasoning as scripts/dev-uninstall.sh: verified
@@ -178,10 +179,12 @@ cask "shiibar-cc" do
         claude plugin marketplace add bufferings/shiibar-cc
         claude plugin install shiibar-cc@shiibar-cc
 
-      Open Shiibar CC once to grant the notification and iTerm2 Automation
-      permissions it needs (it registers itself as a Login Item on that
-      first launch too). Then verify everything end to end from the ⌄ menu's
-      Setup Check, or from a terminal:
+      Open Shiibar CC once to grant the notification permission it needs
+      (it registers itself as a Login Item on that first launch too). It
+      asks for the Automation permission of iTerm2, Terminal.app or Ghostty
+      only when it first needs to control that terminal. Then verify
+      everything end to end from the Setup Check tab of the ⌄ menu's
+      Settings…, or from a terminal:
 
         shiibar-cc doctor
 
