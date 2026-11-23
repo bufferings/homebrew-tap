@@ -13,8 +13,8 @@
 # promising support that has never been tested. A source build from the
 # repository is the alternative for Intel Macs.
 cask "shiibar-cc" do
-  version "0.10.0"
-  sha256 "ab58da71fc6fa4ccaf268f34c3e3e7b42b3f18d576a6d658e1708c644645482d"
+  version "0.11.0"
+  sha256 "5afe097f16e68c4e44cd49b444497e05f684b958d412ce45f0fe90cf4ea93ba4"
 
   url "https://github.com/bufferings/shiibar-cc/releases/download/v#{version}/shiibar-cc-#{version}-arm64.zip"
   name "Shiibar CC"
