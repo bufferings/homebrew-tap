@@ -1,15 +1,15 @@
 # Cask template for the bufferings/homebrew-tap release of Shiibar GH.
 #
 # A template, not a valid cask: .github/workflows/bump-cask.yml replaces
-# 0.10.1 and e903874808602f45c2bdae01418aa7a070d6f1f90acf67671c8d8e99752772f3 when it renders this file into
+# 0.10.2 and 971c565a38aef06842df6df5333fac8f5ea76b8c9dbd784030aba1f821be9694 when it renders this file into
 # Casks/shiibar-gh.rb of bufferings/homebrew-tap for a published release.
 # CI renders it with dummy values and runs `brew style --cask` on it.
 #
 # Apple Silicon only, macOS 14 or later (docs/DESIGN.md, "Distribution and
 # signing").
 cask "shiibar-gh" do
-  version "0.10.1"
-  sha256 "e903874808602f45c2bdae01418aa7a070d6f1f90acf67671c8d8e99752772f3"
+  version "0.10.2"
+  sha256 "971c565a38aef06842df6df5333fac8f5ea76b8c9dbd784030aba1f821be9694"
 
   url "https://github.com/bufferings/shiibar-gh/releases/download/v#{version}/shiibar-gh-#{version}-arm64.zip"
   name "Shiibar GH"
